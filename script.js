@@ -7,12 +7,12 @@ const pocas = [
   {
     name: "디에잇 미니 11집 SEVENTEENTH HEAVEN 캐럿반",
     member: "디에잇",
-    image: "DATAURL_THE8"
+    image: "https://via.placeholder.com/300x460/7ED6A5/ffffff?text=THE8"
   },
   {
     name: "우지 미니 12집 SPILL THE FEELS 캐럿반",
     member: "우지",
-    image: "DATAURL_WOOZI"
+    image: "https://via.placeholder.com/300x460/F7A1C4/ffffff?text=WOOZI"
   }
 ];
 
