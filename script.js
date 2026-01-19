@@ -7,12 +7,12 @@ const pocas = [
   {
     name: "디에잇 미니 11집 SEVENTEENTH HEAVEN 캐럿반",
     member: "디에잇",
-    image: "https://via.placeholder.com/300x460/7ED6A5/ffffff?text=THE8"
+    colorClass: "color-the8"
   },
   {
     name: "우지 미니 12집 SPILL THE FEELS 캐럿반",
     member: "우지",
-    image: "https://via.placeholder.com/300x460/F7A1C4/ffffff?text=WOOZI"
+    colorClass: "color-woozi"
   }
 ];
 
@@ -49,16 +49,16 @@ function render() {
     )
     .forEach(p => {
       const div = document.createElement("div");
-      div.className = "poca";
+      div.className = `poca ${p.colorClass}`;
 
-      const img = document.createElement("img");
-      img.src = p.image;
+      const label = document.createElement("span");
+      label.innerText = p.member;
 
       div.onclick = () => {
         div.classList.toggle("owned");
       };
 
-      div.appendChild(img);
+      div.appendChild(label);
       pocaGrid.appendChild(div);
     });
 }
