@@ -7,12 +7,12 @@ const pocas = [
   {
     name: "디에잇 미니 11집 SEVENTEENTH HEAVEN 캐럿반",
     member: "디에잇",
-    colorClass: "color-the8"
+    colorClass: "poca.color-the8"
   },
   {
     name: "우지 미니 12집 SPILL THE FEELS 캐럿반",
     member: "우지",
-    colorClass: "color-woozi"
+    colorClass: "poca.color-woozi"
   }
 ];
 
