@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont;
+  background: white;
+}
+
+.app {
+  padding: 12px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.member-bar {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.member {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f2f2f2;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.member.active {
+  background: #ffd6e8;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.card {
+  aspect-ratio: 55 / 85;
+  border-radius: 12px;
+  background: #ddd;
+  overflow: hidden;
+  filter: blur(3px);
+  transition: 0.2s;
+}
+
+.card.owned {
+  filter: blur(0);
+}
