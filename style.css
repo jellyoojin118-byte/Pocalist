@@ -65,3 +65,17 @@ body {
 .poca.owned img {
   filter: brightness(100%);
 }
+
+.poca.color-the8 {
+  background: #7ED6A5;
+}
+
+.poca.color-woozi {
+  background: #F7A1C4;
+}
+
+.poca span {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
