@@ -1,67 +1,54 @@
-const members = [
-  "전체","에스쿱스","정한","조슈아","준","호시","원우",
-  "우지","디에잇","민규","도겸","승관","버논","디노"
-];
+// ------------------ 멤버 선택 기능 ------------------
+const members = document.querySelectorAll(".member");
 
-const pocas = [
-  {
-    name: "디에잇 미니 11집 SEVENTEENTH HEAVEN 캐럿반",
-    member: "디에잇",
-    colorClass: "poca.color-the8"
-  },
-  {
-    name: "우지 미니 12집 SPILL THE FEELS 캐럿반",
-    member: "우지",
-    colorClass: "poca.color-woozi"
-  }
-];
-
-const memberBar = document.getElementById("memberBar");
-const pocaGrid = document.getElementById("pocaGrid");
-const searchInput = document.getElementById("searchInput");
-
-let selectedMember = "전체";
-
+// 초기 상태: 검정색
 members.forEach(member => {
-  const btn = document.createElement("button");
-  btn.className = "member-btn";
-  btn.innerText = member;
-  if (member === "전체") btn.classList.add("active");
-
-  btn.onclick = () => {
-    selectedMember = member;
-    document.querySelectorAll(".member-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    render();
-  };
-
-  memberBar.appendChild(btn);
+  member.addEventListener("click", () => {
+    // 모든 멤버 초기화
+    members.forEach(m => m.style.color = "black");
+    // 선택된 멤버 강조
+    member.style.color = "#FFB6C1"; // 파스텔톤 예시
+  });
 });
 
-function render() {
-  const keyword = searchInput.value.toLowerCase();
-  pocaGrid.innerHTML = "";
+// ------------------ 사진 추가 기능 ------------------
+const menuBtn = document.getElementById("menuBtn");
+const addModal = document.getElementById("addModal");
+const addPhotoBtn = document.getElementById("addPhotoBtn");
+const fileInput = document.getElementById("fileInput");
+const pocaGrid = document.getElementById("pocaGrid");
 
-  pocas
-    .filter(p =>
-      (selectedMember === "전체" || p.member === selectedMember) &&
-      p.name.toLowerCase().includes(keyword)
-    )
-    .forEach(p => {
-      const div = document.createElement("div");
-      div.className = `poca ${p.colorClass}`;
+// LocalStorage 초기화
+const savedImages = JSON.parse(localStorage.getItem("pocaImages") || "[]");
+savedImages.forEach(dataUrl => {
+  const img = document.createElement("img");
+  img.src = dataUrl;
+  pocaGrid.appendChild(img);
+});
 
-      const label = document.createElement("span");
-      label.innerText = p.member;
+// 메뉴 버튼 클릭 → +추가하기 창 토글
+menuBtn.addEventListener("click", () => {
+  addModal.style.display = addModal.style.display === "none" ? "block" : "none";
+});
 
-      div.onclick = () => {
-        div.classList.toggle("owned");
-      };
+// +추가하기 버튼 클릭 → 사진 앱 열기
+addPhotoBtn.addEventListener("click", () => {
+  fileInput.click();
+});
 
-      div.appendChild(label);
-      pocaGrid.appendChild(div);
-    });
-}
+// 사진 선택 시
+fileInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
 
-searchInput.oninput = render;
-render();
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = document.createElement("img");
+    img.src = e.target.result;
+    pocaGrid.appendChild(img);
+
+    savedImages.push(e.target.result);
+    localStorage.setItem("pocaImages", JSON.stringify(savedImages));
+  };
+  reader.readAsDataURL(file);
+});
