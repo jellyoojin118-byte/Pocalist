@@ -76,8 +76,12 @@ body {
   align-items: center;
 }
 
-.modal-box {
+.modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  width: 80%;
+  max-width: 320px;
+  padding: 24px 20px;
+  border-radius: 14px;
+  text-align: center;
+}
 }
