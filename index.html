@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>SEVENTEEN PocaList</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <input id="searchInput" placeholder="포토카드 검색..." />
+
+  <div id="memberBar" class="member-bar"></div>
+
+  <div id="pocaGrid" class="grid"></div>
+
+  <button id="addBtn">＋</button>
+
+  <input type="file" id="fileInput" accept="image/*" hidden />
+
+</div>
+
+<!-- 길게 눌렀을 때 메뉴 -->
+<div id="actionModal" class="modal">
+  <div class="modal-box">
+    <button id="deleteBtn">삭제</button>
+    <button id="cancelBtn">취소</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
