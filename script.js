@@ -18,7 +18,7 @@ const cancelBtn = document.getElementById("cancelBtn");
 
 let selectedPoca = null;
 
-// 멤버바 생성
+/* 멤버바 생성 */
 ["전체", ...members].forEach(name => {
   const div = document.createElement("div");
   div.className = "member";
@@ -34,15 +34,14 @@ let selectedPoca = null;
   memberBar.appendChild(div);
 });
 
-// 저장
+/* 저장 */
 function saveData() {
   localStorage.setItem("pocaData", JSON.stringify(pocaData));
 }
 
-// 그리드 렌더
+/* 그리드 */
 function renderGrid() {
   pocaGrid.innerHTML = "";
-
   const keyword = searchInput.value.toLowerCase();
 
   pocaData
@@ -53,14 +52,14 @@ function renderGrid() {
       img.src = p.image;
       if (p.owned) img.classList.add("owned");
 
-      // 탭 → 보유 체크
+      // 탭 = 보유
       img.addEventListener("click", () => {
         p.owned = !p.owned;
         saveData();
         renderGrid();
       });
 
-      // 길게 누르기 → 메뉴
+      // 길게 누르기 = 메뉴
       let pressTimer;
       img.addEventListener("touchstart", () => {
         pressTimer = setTimeout(() => {
@@ -77,13 +76,11 @@ function renderGrid() {
     });
 }
 
-// 검색
 searchInput.addEventListener("input", renderGrid);
 
-// 추가 버튼
+/* 추가 */
 addBtn.addEventListener("click", () => fileInput.click());
 
-// 사진 추가
 fileInput.addEventListener("change", e => {
   const file = e.target.files[0];
   if (!file) return;
@@ -105,7 +102,7 @@ fileInput.addEventListener("change", e => {
   reader.readAsDataURL(file);
 });
 
-// 삭제
+/* 삭제 */
 deleteBtn.addEventListener("click", () => {
   pocaData = pocaData.filter(p => p !== selectedPoca);
   saveData();
