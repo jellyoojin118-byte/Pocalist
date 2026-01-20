@@ -76,23 +76,46 @@ body {
   color: white;
 }
 
-/* 작은 폰 (SE급) */
-@media (max-width: 400px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+/* ================= 반응형 포카 그리드 (강제 적용) ================= */
+
+#pocaGrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 10px !important;
+  padding: 12px !important;
+}
+
+/* 초소형 폰 */
+@media (max-width: 360px) {
+  #pocaGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
-/* 큰 폰 + 작은 태블릿 */
-@media (min-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(5, 1fr);
+/* 큰 폰 */
+@media (min-width: 430px) {
+  #pocaGrid {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 
-/* 태블릿 가로 + 노트북 */
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(6, 1fr);
+/* 태블릿 */
+@media (min-width: 700px) {
+  #pocaGrid {
+    grid-template-columns: repeat(5, 1fr) !important;
   }
+}
+
+/* PC */
+@media (min-width: 1000px) {
+  #pocaGrid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+
+.poca {
+  width: 100% !important;
+  aspect-ratio: 55 / 85 !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
 }
