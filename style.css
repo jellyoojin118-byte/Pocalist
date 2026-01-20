@@ -1,79 +1,98 @@
-body {
-  margin: 0;
-  background: white;
-  font-family: sans-serif;
+/* ---------- 기본 ---------- */
+* {
+  box-sizing: border-box;
 }
 
-.app {
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  background: white;
+  color: black;
+}
+
+/* ---------- 상단 영역 ---------- */
+.top-bar {
+  display: flex;
+  gap: 10px;
   padding: 12px;
+  align-items: center;
 }
 
 #searchInput {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  flex: 1;
+  padding: 12px 14px;
   font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
+#menuBtn {
+  width: 48px;
+  height: 48px;
+  font-size: 26px;
+  border: none;
+  border-radius: 12px;
+  background: black;
+  color: white;
+}
+
+/* ---------- 멤버 바 ---------- */
 .member-bar {
   display: flex;
+  gap: 14px;
+  padding: 10px 14px;
   overflow-x: auto;
-  margin-bottom: 12px;
 }
 
 .member {
-  margin-right: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   color: black;
 }
 
-.member.active {
-  color: #ffb6c1;
-}
-
-.grid {
+/* ---------- 포카 그리드 ---------- */
+#pocaGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr); /* 아이폰 */
+  gap: 10px;
+  padding: 12px;
 }
 
-.grid img {
+@media (min-width: 768px) {
+  #pocaGrid {
+    grid-template-columns: repeat(5, 1fr); /* 아이패드 이상 */
+  }
+}
+
+.poca {
   width: 100%;
   aspect-ratio: 55 / 85;
   object-fit: cover;
-  border-radius: 8px;
-  opacity: 0.3;
-  transition: 0.2s;
+  border-radius: 12px;
+  filter: brightness(0.4);
+  transition: 0.25s;
 }
 
-.grid img.owned {
-  opacity: 1;
+.poca.owned {
+  filter: brightness(1);
 }
 
-#addBtn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background: #ffb6c1;
-  color: white;
-  font-size: 30px;
-}
-
-/* 모달 */
-
+/* ---------- 모달 ---------- */
 .modal {
-  display: none;
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.4);
+
+  display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 999;
 }
 
 .modal-content {
@@ -84,4 +103,26 @@ body {
   border-radius: 14px;
   text-align: center;
 }
+
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+#deleteBtn {
+  background: #ff5c5c;
+  color: white;
+}
+
+#cancelBtn {
+  background: #eee;
 }
