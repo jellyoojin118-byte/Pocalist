@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>SEVENTEEN PocaList</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>SEVENTEEN POCALIST</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="app">
-  <input id="searchInput" placeholder="포토카드 검색..." />
+  <!-- 검색창 + 메뉴 -->
+  <div class="top-bar">
+    <input id="searchInput" placeholder="포토카드 검색..." />
+    <button id="menuBtn">☰</button>
+  </div>
 
-  <div id="memberBar" class="member-bar"></div>
+  <!-- +추가하기 창 -->
+  <div id="addModal">
+    <button id="addPhotoBtn">+ 추가하기</button>
+  </div>
 
+  <!-- 멤버 선택 바 -->
+  <div id="memberBar" class="member-bar">
+    <span class="member" data-name="Woozi">Woozi</span>
+    <span class="member" data-name="D8">D8</span>
+    <!-- 필요한 멤버 추가 가능 -->
+  </div>
+
+  <!-- 사진 그리드 -->
   <div id="pocaGrid" class="grid"></div>
 </div>
+
+<!-- 사진 파일 선택 (숨김) -->
+<input type="file" id="fileInput" accept="image/*" style="display:none;">
 
 <script src="script.js"></script>
 </body>
