@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>SEVENTEEN PocaList</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>포카리스트</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
+  <input id="searchInput" placeholder="포토카드 검색..." />
 
-  <!-- 상단 바 -->
-  <div class="top-bar">
-    <input id="searchInput" placeholder="포토카드 검색..." />
-    <button id="menuBtn">＋</button>
-  </div>
-
-  <!-- 멤버 선택 바 -->
   <div id="memberBar" class="member-bar"></div>
 
-  <!-- 포카 그리드 -->
-  <div id="pocaGrid" class="grid"></div>
-</div>
-
-<!-- 사진 추가 모달 -->
-<div id="addModal" class="modal">
-  <button id="addPhotoBtn">사진 추가</button>
+  <div id="pocaGrid"></div>
 </div>
 
 <input type="file" id="fileInput" accept="image/*" hidden>
 
-<script src="script.js"></script>
+<button id="addBtn">＋</button>
 
+<!-- 길게누르기 메뉴 -->
 <div id="actionModal" class="action-modal">
   <div class="action-box">
     <button id="editBtn">수정</button>
@@ -39,5 +29,6 @@
   </div>
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>
