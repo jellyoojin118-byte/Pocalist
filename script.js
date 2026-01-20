@@ -1,4 +1,3 @@
-// ================= 데이터 =================
 let pocaData = JSON.parse(localStorage.getItem("pocaData")) || [];
 
 const members = [
@@ -9,37 +8,27 @@ const members = [
 let selectedMember = "전체";
 let selectedPoca = null;
 
-// ================= DOM =================
+// DOM
 const memberBar = document.getElementById("memberBar");
 const pocaGrid = document.getElementById("pocaGrid");
 const searchInput = document.getElementById("searchInput");
 const fileInput = document.getElementById("fileInput");
+const addBtn = document.getElementById("addBtn");
 
 const actionModal = document.getElementById("actionModal");
 const deleteBtn = document.getElementById("deleteBtn");
 const editBtn = document.getElementById("editBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 
-// ================= 저장 =================
 function saveData() {
   localStorage.setItem("pocaData", JSON.stringify(pocaData));
 }
 
-// ================= 멤버바 =================
+// 멤버바
 function renderMembers() {
   memberBar.innerHTML = "";
 
-  const allBtn = document.createElement("span");
-  allBtn.className = "member";
-  allBtn.innerText = "전체";
-  allBtn.onclick = () => {
-    selectedMember = "전체";
-    renderMembers();
-    renderGrid();
-  };
-  memberBar.appendChild(allBtn);
-
-  members.forEach(name => {
+  ["전체", ...members].forEach(name => {
     const span = document.createElement("span");
     span.className = "member";
     span.innerText = name;
@@ -58,7 +47,7 @@ function renderMembers() {
   });
 }
 
-// ================= 포카 그리기 =================
+// 포카 출력
 function renderGrid() {
   pocaGrid.innerHTML = "";
 
@@ -82,7 +71,7 @@ function renderGrid() {
         renderGrid();
       };
 
-      // 길게 누르기 메뉴
+      // 길게누르기
       let pressTimer;
       img.addEventListener("touchstart", () => {
         pressTimer = setTimeout(() => {
@@ -99,7 +88,13 @@ function renderGrid() {
     });
 }
 
-// ================= 사진 추가 =================
+// 검색
+searchInput.addEventListener("input", renderGrid);
+
+// 추가 버튼
+addBtn.onclick = () => fileInput.click();
+
+// 사진 추가
 fileInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -107,7 +102,7 @@ fileInput.addEventListener("change", (e) => {
   const reader = new FileReader();
   reader.onload = (event) => {
     const name = prompt("포카 이름 입력");
-    const member = prompt("멤버 이름 입력 (정확히)");
+    const member = prompt("멤버 이름 입력");
 
     if (!name || !member) return;
 
@@ -124,7 +119,7 @@ fileInput.addEventListener("change", (e) => {
   reader.readAsDataURL(file);
 });
 
-// ================= 액션 모달 =================
+// 모달 버튼
 deleteBtn.onclick = () => {
   pocaData = pocaData.filter(p => p !== selectedPoca);
   saveData();
@@ -146,6 +141,6 @@ cancelBtn.onclick = () => {
   actionModal.style.display = "none";
 };
 
-// ================= 시작 =================
+// 시작
 renderMembers();
 renderGrid();
