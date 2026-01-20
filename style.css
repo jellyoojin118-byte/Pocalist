@@ -44,13 +44,14 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 10px;
 }
 
 .poca {
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 55 / 85;
   object-fit: cover;
   border-radius: 8px;
   transition: 0.2s;
@@ -73,4 +74,25 @@ body {
   border-radius: 20px;
   background: black;
   color: white;
+}
+
+/* 작은 폰 (SE급) */
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 큰 폰 + 작은 태블릿 */
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* 태블릿 가로 + 노트북 */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
