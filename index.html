@@ -1,47 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>SEVENTEEN POCALIST</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>SEVENTEEN PocaList</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<button id="addBtn">+</button>
-
-<div id="addModal" class="modal hidden">
-  <div class="modal-box">
-    <input type="file" id="imageInput" accept="image/*" />
-    <input type="text" id="nameInput" placeholder="포카 이름" />
-    <select id="memberSelect"></select>
-    <button id="saveBtn">등록</button>
-  </div>
-</div>
-
 <body>
+
 <div class="app">
-  <!-- 검색창 + 메뉴 -->
+
+  <!-- 상단 바 -->
   <div class="top-bar">
     <input id="searchInput" placeholder="포토카드 검색..." />
-    <button id="menuBtn">☰</button>
-  </div>
-
-  <!-- +추가하기 창 -->
-  <div id="addModal">
-    <button id="addPhotoBtn">+ 추가하기</button>
+    <button id="menuBtn">＋</button>
   </div>
 
   <!-- 멤버 선택 바 -->
-  <div id="memberBar" class="member-bar">
-    <span class="member" data-name="Woozi">Woozi</span>
-    <span class="member" data-name="D8">D8</span>
-    <!-- 필요한 멤버 추가 가능 -->
-  </div>
+  <div id="memberBar" class="member-bar"></div>
 
-  <!-- 사진 그리드 -->
+  <!-- 포카 그리드 -->
   <div id="pocaGrid" class="grid"></div>
 </div>
 
-<!-- 사진 파일 선택 (숨김) -->
-<input type="file" id="fileInput" accept="image/*" style="display:none;">
+<!-- 사진 추가 모달 -->
+<div id="addModal" class="modal">
+  <button id="addPhotoBtn">사진 추가</button>
+</div>
+
+<input type="file" id="fileInput" accept="image/*" hidden>
 
 <script src="script.js"></script>
 </body>
