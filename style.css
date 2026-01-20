@@ -98,3 +98,33 @@ body {
     grid-template-columns: repeat(6, 1fr);
   }
 }
+
+/* ===== 아이패드 전용 ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* 포카 그리드 */
+  .poca-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    padding: 16px;
+  }
+
+  /* 검색창 글자 */
+  .search-wrap input {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  /* 멤버 버튼 */
+  .member {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+
+  /* 플로팅 버튼 */
+  .fab {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
+}
