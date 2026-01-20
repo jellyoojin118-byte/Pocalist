@@ -1,53 +1,75 @@
+/* ===== 기본 ===== */
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard", sans-serif;
 }
 
 body {
   margin: 0;
   background: #ffffff;
+  color: #000;
 }
 
-/* 멤버 바 */
+/* ===== 검색창 ===== */
+.search-wrap {
+  padding: 12px 16px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: none;
+  background: #f1f1f1;
+  font-size: 15px;
+}
+
+/* ===== 멤버 바 ===== */
 .member-bar {
   display: flex;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 8px 12px;
   overflow-x: auto;
 }
 
 .member {
-  background: none;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
   border: none;
+  background: #fff;
+  color: #000;
   font-size: 14px;
-  color: black;
   cursor: pointer;
 }
 
 .member.active {
-  color: #9ad0ec; /* 세레니티 블루 */
+  color: #9bb7d4; /* serenity */
 }
 
-/* 카드 그리드 */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-  gap: 10px;
+/* ===== 포카 그리드 ===== */
+.poca-grid {
   padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 
-.card {
-  aspect-ratio: 1 / 1;
-  background: #eee;
-  border-radius: 8px;
+/* 포카 카드 */
+.poca-card {
+  aspect-ratio: 55 / 85;
+  border-radius: 10px;
+  background: #eaeaea;
 }
 
-/* 하단 버튼 */
+/* ===== 플로팅 버튼 ===== */
 .floating-buttons {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  right: 16px;
+  bottom: 16px;
   display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -56,65 +78,23 @@ body {
   height: 56px;
   border-radius: 50%;
   border: none;
-  font-size: 24px;
+  background: #f4b6c2; /* 로즈쿼츠 */
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
   cursor: pointer;
 }
 
-.fab.add {
-  background: #f6b6c9;
-  color: white;
+/* ===== 반응형 ===== */
+@media (max-width: 480px) {
+  .poca-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
-.fab.admin {
-  background: #9ad0ec;
-  color: white;
-}
-
-/* 모달 */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hidden {
-  display: none;
-}
-
-.modal-box {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  width: 280px;
-  position: relative;
-}
-
-.modal-box img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.modal-box input,
-.modal-box select {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  border: none;
-  background: none;
-  font-size: 16px;
+@media (min-width: 768px) {
+  .poca-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
