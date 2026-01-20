@@ -163,6 +163,18 @@ function renderGrid() {
       const img = document.createElement("img");
       img.src = p.image;
       img.className = "poca" + (p.owned ? "" : " unowned");
+      let pressTimer;
+
+img.addEventListener("touchstart", () => {
+  pressTimer = setTimeout(() => {
+    selectedPoca = p;
+    document.getElementById("actionModal").style.display = "flex";
+  }, 600);
+});
+
+img.addEventListener("touchend", () => {
+  clearTimeout(pressTimer);
+});
 
       img.addEventListener("click", () => {
         p.owned = !p.owned;
@@ -224,4 +236,29 @@ fileInput.addEventListener("change", e => {
   reader.readAsDataURL(file);
 });
 
+const actionModal = document.getElementById("actionModal");
+const deleteBtn = document.getElementById("deleteBtn");
+const editBtn = document.getElementById("editBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+
+deleteBtn.addEventListener("click", () => {
+  pocaData = pocaData.filter(item => item !== selectedPoca);
+  saveData();
+  renderGrid();
+  actionModal.style.display = "none";
+});
+
+editBtn.addEventListener("click", () => {
+  const newName = prompt("새 포카 이름 입력", selectedPoca.name);
+  if (newName) {
+    selectedPoca.name = newName;
+    saveData();
+    renderGrid();
+  }
+  actionModal.style.display = "none";
+});
+
+cancelBtn.addEventListener("click", () => {
+  actionModal.style.display = "none";
+});
 
