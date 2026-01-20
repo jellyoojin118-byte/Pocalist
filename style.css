@@ -5,86 +5,60 @@ body {
 }
 
 .app {
-  padding: 12px;
-}
-
-.top-bar {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  padding: 10px;
 }
 
 #searchInput {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
-}
-
-#menuBtn {
-  font-size: 20px;
-  border: none;
-  background: #eee;
-  border-radius: 8px;
-  width: 40px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .member-bar {
   display: flex;
   overflow-x: auto;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .member {
-  cursor: pointer;
-  font-weight: bold;
-  color: black;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-.grid {
+#pocaGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  padding: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 
-.poca.unowned {
-  filter: blur(4px) brightness(0.7);
+.poca {
+  width: 100%;
+  aspect-ratio: 55 / 85;
+  object-fit: cover;
+  border-radius: 12px;
+  filter: brightness(0.4);
+  transition: 0.25s;
 }
 
-.modal {
+.poca.owned {
+  filter: brightness(1);
+}
+
+#addBtn {
   position: fixed;
-  bottom: 20px;
   right: 20px;
-  display: none;
-}
-
-.modal button {
-  padding: 10px 14px;
+  bottom: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
   border: none;
-  border-radius: 20px;
-  background: black;
+  font-size: 28px;
+  background: #ffb6c1;
   color: white;
 }
 
-/* ================= 반응형 포카 그리드 (강제 적용) ================= */
-
-#pocaGrid {
-  display: grid !important;
-  grid-template-columns: repeat(5, 1fr) !important;
-  gap: 10px !important;
-  padding: 12px !important;
-}
-
-
-.poca {
-  width: 100% !important;
-  aspect-ratio: 55 / 85 !important;
-  object-fit: cover !important;
-  border-radius: 12px !important;
-}
-
+/* 액션 모달 */
 .action-modal {
   position: fixed;
   top: 0;
@@ -93,9 +67,8 @@ body {
   height: 100%;
   background: rgba(0,0,0,0.4);
   display: none;
-  align-items: center;
   justify-content: center;
-  z-index: 999;
+  align-items: center;
 }
 
 .action-box {
