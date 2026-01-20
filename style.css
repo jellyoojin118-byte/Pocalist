@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: white;
+}
+
+.app {
+  padding: 10px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.member-bar {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+
+.member {
+  margin-right: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  white-space: nowrap;
+}
+
+.member.active {
+  color: #ffb6c1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.grid img {
+  width: 100%;
+  aspect-ratio: 55 / 85;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.3;
+  transition: 0.2s;
+}
+
+.grid img.owned {
+  opacity: 1;
+}
+
+#addBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 30px;
+  border: none;
+  background: #ffb6c1;
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+}
+
+/* 모달 */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
