@@ -49,14 +49,6 @@ body {
   padding: 10px;
 }
 
-.poca {
-  width: 100%;
-  aspect-ratio: 55 / 85;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
 .poca.unowned {
   filter: blur(4px) brightness(0.7);
 }
@@ -80,38 +72,11 @@ body {
 
 #pocaGrid {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(5, 1fr) !important;
   gap: 10px !important;
   padding: 12px !important;
 }
 
-/* 초소형 폰 */
-@media (max-width: 360px) {
-  #pocaGrid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-
-/* 큰 폰 */
-@media (min-width: 430px) {
-  #pocaGrid {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-}
-
-/* 태블릿 */
-@media (min-width: 700px) {
-  #pocaGrid {
-    grid-template-columns: repeat(5, 1fr) !important;
-  }
-}
-
-/* PC */
-@media (min-width: 1000px) {
-  #pocaGrid {
-    grid-template-columns: repeat(6, 1fr) !important;
-  }
-}
 
 .poca {
   width: 100% !important;
@@ -119,3 +84,4 @@ body {
   object-fit: cover !important;
   border-radius: 12px !important;
 }
+
