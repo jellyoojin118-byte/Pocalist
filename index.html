@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>PocaList</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEVENTEEN Poca List</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="app">
-
-  <input id="searchInput" placeholder="포토카드 검색...">
-
-  <div id="memberBar" class="member-bar"></div>
-
-  <div id="pocaGrid" class="grid"></div>
-
-  <button id="addBtn">＋</button>
-  <input type="file" id="fileInput" accept="image/*" hidden>
-
-</div>
-
-<div id="actionModal" class="modal">
-  <div class="modal-box">
-    <button id="deleteBtn">삭제</button>
-    <button id="cancelBtn">취소</button>
+  <!-- 멤버 선택 바 -->
+  <div class="member-bar">
+    <button class="member active" data-member="all">ALL</button>
+    <button class="member" data-member="scoups">S.COUPS</button>
+    <button class="member" data-member="jeonghan">JEONGHAN</button>
+    <button class="member" data-member="joshua">JOSHUA</button>
+    <button class="member" data-member="woozi">WOOZI</button>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <!-- 포토카드 그리드 -->
+  <div class="card-grid" id="cardGrid">
+    <!-- 카드 JS로 생성 -->
+  </div>
+
+  <!-- 하단 버튼 -->
+  <div class="floating-buttons">
+    <button class="fab add">+</button>
+    <button class="fab admin">A</button>
+  </div>
+
+  <!-- 관리자 비밀번호 모달 -->
+  <div class="modal hidden" id="adminModal">
+    <div class="modal-box">
+      <h2>ADMIN MODE</h2>
+      <input type="password" id="adminPassword" placeholder="비밀번호 입력" />
+      <div class="modal-actions">
+        <button id="adminCancel">취소</button>
+        <button id="adminConfirm">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 포카 관리 모달 -->
+  <div class="modal hidden" id="cardModal">
+    <div class="modal-box">
+      <button class="close">✕</button>
+
+      <img id="modalImage" />
+      <input id="modalName" />
+      <select id="modalMember">
+        <option value="scoups">S.COUPS</option>
+        <option value="jeonghan">JEONGHAN</option>
+        <option value="joshua">JOSHUA</option>
+        <option value="woozi">WOOZI</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="editCard">수정</button>
+        <button id="deleteCard">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
