@@ -9,6 +9,12 @@ body {
   margin: 0;
   background: #ffffff;
   color: #000;
+  body {
+
+  /* ⬇️ 추가 */
+  display: flex;
+  justify-content: center;
+}
 }
 
 /* ===== 검색창 ===== */
@@ -99,32 +105,8 @@ body {
   }
 }
 
-/* ===== 아이패드 전용 ===== */
-@media (min-width: 768px) and (max-width: 1024px) {
-
-  /* 포카 그리드 */
-  .poca-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
-    padding: 16px;
-  }
-
-  /* 검색창 글자 */
-  .search-wrap input {
-    font-size: 16px;
-    padding: 14px 16px;
-  }
-
-  /* 멤버 버튼 */
-  .member {
-    font-size: 15px;
-    padding: 10px 16px;
-  }
-
-  /* 플로팅 버튼 */
-  .fab {
-    width: 64px;
-    height: 64px;
-    font-size: 24px;
-  }
+/* ===== 앱 전체 컨테이너 ===== */
+.app-container {
+  width: 100%;
+  max-width: 480px;   /* 📱 아이폰 기준 */
 }
