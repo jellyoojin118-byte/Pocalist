@@ -13,7 +13,7 @@ body {
 
 /* ===== 검색창 ===== */
 .search-wrap {
-  padding: 12px 16px;
+  padding: 8px 12px;   /* 멤버바랑 동일 */
 }
 
 .search-wrap input {
