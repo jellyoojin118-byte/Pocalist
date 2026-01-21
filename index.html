@@ -8,34 +8,39 @@
 </head>
 <body>
 
-  <div class="app-container">
+  <!-- 검색창 -->
+  <div class="search-wrap">
+    <input type="text" placeholder="포토카드 검색..." />
+  </div>
 
-    <!-- 검색창 -->
-    <div class="search-wrap">
-      <input type="text" placeholder="포토카드 검색..." />
-    </div>
+  <!-- 멤버 바 -->
+  <div class="member-bar">
+    <button class="member active">전체</button>
+    <button class="member">에스쿱스</button>
+    <button class="member">정한</button>
+    <button class="member">조슈아</button>
+    <button class="member">준</button>
+    <button class="member">호시</button>
+    <button class="member">원우</button>
+    <button class="member">우지</button>
+    <button class="member">디에잇</button>
+    <button class="member">민규</button>
+    <button class="member">도겸</button>
+    <button class="member">승관</button>
+    <button class="member">버논</button>
+    <button class="member">디노</button>
+  </div>
 
-    <!-- 멤버 바 -->
-    <div class="member-bar">
-      <button class="member active">전체</button>
-      <button class="member">에스쿱스</button>
-      <button class="member">정한</button>
-      <button class="member">조슈아</button>
-      <button class="member">준</button>
-      <button class="member">호시</button>
-      <button class="member">원우</button>
-      <button class="member">우지</button>
-      <button class="member">디에잇</button>
-      <button class="member">민규</button>
-      <button class="member">도겸</button>
-      <button class="member">승관</button>
-      <button class="member">버논</button>
-      <button class="member">디노</button>
-    </div>
-
-    <!-- 포카 그리드 (빈 상태) -->
-    <div class="poca-grid"></div>
-
+  <!-- 포카 그리드 -->
+  <div class="poca-grid">
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
+    <div class="poca-card"></div>
   </div>
 
   <!-- 플로팅 버튼 -->
@@ -43,9 +48,6 @@
     <button class="fab admin">A</button>
     <button class="fab add">+</button>
   </div>
-
-  <!-- 파일 선택 -->
-  <input type="file" id="fileInput" accept="image/*" hidden />
 
 </body>
 </html>
