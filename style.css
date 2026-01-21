@@ -10,7 +10,6 @@ body {
   background: #ffffff;
   color: #000;
   /* ⬇️ 추가 */
-  display: flex;
   justify-content: center;
 }
 }
