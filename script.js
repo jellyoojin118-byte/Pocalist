@@ -1,61 +1,180 @@
-const members = ["전체","에스쿱스","정한","조슈아","준","호시","원우","우지","디에잇","민규","도겸","승관","버논","디노"];
-const memberBar = document.getElementById("memberBar");
-const pocaGrid = document.getElementById("pocaGrid");
-const fileInput = document.getElementById("fileInput");
-const modal = document.getElementById("modal");
+/* ===============================
+   멤버 선택
+================================ */
+const members = document.querySelectorAll(".member");
 
-let admin = false;
-let selected = null;
-
-let cards = JSON.parse(localStorage.getItem("pocas") || "[]");
-
-members.forEach(m=>{
-  const b=document.createElement("button");
-  b.textContent=m;
-  b.className="member";
-  if(m==="전체") b.classList.add("active");
-  b.onclick=()=>selectMember(m,b);
-  memberBar.appendChild(b);
+members.forEach(btn => {
+  btn.addEventListener("click", () => {
+    members.forEach(m => m.classList.remove("active"));
+    btn.classList.add("active");
+  });
 });
 
-function selectMember(m,btn){
-  document.querySelectorAll(".member").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  render(m);
+/* ===============================
+   포카 데이터 (임시)
+================================ */
+let pocaData = [];
+const pocaGrid = document.querySelector(".poca-grid");
+
+/* 초기 포카 생성 */
+document.querySelectorAll(".poca-card").forEach((card, index) => {
+  const data = {
+    id: Date.now() + index,
+    name: "포카 이름",
+    member: "전체",
+  };
+  pocaData.push(data);
+  card.dataset.id = data.id;
+});
+
+/* ===============================
+   롱프레스 감지
+================================ */
+let pressTimer = null;
+let activeCardId = null;
+
+pocaGrid.addEventListener("mousedown", startPress);
+pocaGrid.addEventListener("touchstart", startPress);
+
+pocaGrid.addEventListener("mouseup", cancelPress);
+pocaGrid.addEventListener("mouseleave", cancelPress);
+pocaGrid.addEventListener("touchend", cancelPress);
+
+function startPress(e) {
+  const card = e.target.closest(".poca-card");
+  if (!card) return;
+
+  activeCardId = card.dataset.id;
+
+  pressTimer = setTimeout(() => {
+    openModal(activeCardId);
+  }, 500);
 }
 
-function render(filter="전체"){
-  pocaGrid.innerHTML="";
-  cards.forEach((c,i)=>{
-    if(filter!=="전체" && c.member!==filter) return;
-    const d=document.createElement("div");
-    d.className="poca-card"+(c.owned?" owned":"");
-    d.innerHTML=`<img src="${c.img}">`;
-    d.onclick=()=>{c.owned=!c.owned; save(); render(filter);}
-    d.oncontextmenu=e=>{
-      e.preventDefault();
-      if(!admin) return;
-      selected=i;
-      modal.style.display="block";
-      modalName.value=c.name;
-    }
-    pocaGrid.appendChild(d);
-  });
+function cancelPress() {
+  clearTimeout(pressTimer);
 }
 
-function save(){
-  localStorage.setItem("pocas",JSON.stringify(cards));
+/* ===============================
+   모달 생성
+================================ */
+function openModal(id) {
+  const poca = pocaData.find(p => p.id == id);
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.innerHTML = `
+    <div class="modal">
+      <button class="close">✕</button>
+
+      <label>포카 이름</label>
+      <input type="text" id="editName" value="${poca.name}" />
+
+      <label>멤버</label>
+      <select id="editMember">
+        ${[...members].map(m => `
+          <option ${poca.member === m.innerText ? "selected" : ""}>
+            ${m.innerText}
+          </option>
+        `).join("")}
+      </select>
+
+      <div class="modal-actions">
+        <button class="edit">수정</button>
+        <button class="delete">삭제</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  /* 닫기 */
+  modal.querySelector(".close").onclick = () => modal.remove();
+
+  /* 수정 */
+  modal.querySelector(".edit").onclick = () => {
+    poca.name = modal.querySelector("#editName").value;
+    poca.member = modal.querySelector("#editMember").value;
+    modal.remove();
+  };
+
+  /* 삭제 */
+  modal.querySelector(".delete").onclick = () => {
+    pocaData = pocaData.filter(p => p.id != id);
+    document.querySelector(`.poca-card[data-id="${id}"]`).remove();
+    modal.remove();
+  };
 }
 
-addBtn.onclick=()=>fileInput.click();
-fileInput.onchange=e=>{
-  const r=new FileReader();
-  r.onload=()=>{cards.push({img:r.result,name:"",member:"",owned:false});save();render();}
-  r.readAsDataURL(e.target.files[0]);
+/* ===============================
+   모달 스타일 (JS에서 주입)
+================================ */
+const style = document.createElement("style");
+style.innerHTML = `
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-adminBtn.onclick=()=>{
-  if(prompt("암호")==="1234") admin=true;
+.modal {
+  width: 90%;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
 }
 
-document.querySelector(".close").onclick=()=>modal.style.display="none";
+.modal .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: none;
+  font-size: 18px;
+}
+
+.modal label {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+.modal-actions .edit {
+  background: #9bb7d4;
+  color: #fff;
+}
+
+.modal-actions .delete {
+  background: #f4b6c2;
+  color: #fff;
+}
+`;
+document.head.appendChild(style);
