@@ -9,18 +9,17 @@ body {
   margin: 0;
   background: #ffffff;
   color: #000;
-}
+  body {
 
-/* ===== 앱 컨테이너 ===== */
-.app-container {
-  width: 100%;
-  max-width: 480px;   /* 아이폰 기준 */
-  margin: 0 auto;     /* 가운데 정렬 */
+  /* ⬇️ 추가 */
+  display: flex;
+  justify-content: center;
+}
 }
 
 /* ===== 검색창 ===== */
 .search-wrap {
-  padding: 8px 12px;
+  padding: 8px 12px;   /* 멤버바랑 동일 */
 }
 
 .search-wrap input {
@@ -59,7 +58,7 @@ body {
 .poca-grid {
   padding: 12px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
 
@@ -94,14 +93,20 @@ body {
 }
 
 /* ===== 반응형 ===== */
-@media (min-width: 480px) {
+@media (max-width: 480px) {
   .poca-grid {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (min-width: 768px) {
-  .app-container {
-    max-width: 600px; /* 아이패드 */
+  .poca-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
+}
+
+/* ===== 앱 전체 컨테이너 ===== */
+.app-container {
+  width: 100%;
+  max-width: 480px;   /* 📱 아이폰 기준 */
 }
