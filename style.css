@@ -9,8 +9,6 @@ body {
   margin: 0;
   background: #ffffff;
   color: #000;
-  body {
-
   /* ⬇️ 추가 */
   display: flex;
   justify-content: center;
