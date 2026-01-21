@@ -6,7 +6,6 @@ const ADMIN_PASSWORD = "0000";
 
 let pocas = JSON.parse(localStorage.getItem("pocas") || "[]");
 let currentMember = "전체";
-let selectedIndex = null;
 
 /* =========================
    DOM
@@ -16,35 +15,6 @@ const addBtn = document.querySelector(".fab.add");
 const adminBtn = document.querySelector(".fab.admin");
 const searchInput = document.querySelector(".search-wrap input");
 const members = document.querySelectorAll(".member");
-
-/* =========================
-   모달 생성
-========================= */
-const modal = document.createElement("div");
-modal.className = "modal hidden";
-modal.innerHTML = `
-  <div class="modal-content">
-    <button class="close-btn">✕</button>
-
-    <label>멤버</label>
-    <input id="editMember" />
-
-    <label>앨범 / 포카 이름</label>
-    <input id="editAlbum" />
-
-    <div class="modal-actions">
-      <button id="saveBtn">수정</button>
-      <button id="deleteBtn">삭제</button>
-    </div>
-  </div>
-`;
-document.body.appendChild(modal);
-
-const closeBtn = modal.querySelector(".close-btn");
-const editMember = modal.querySelector("#editMember");
-const editAlbum = modal.querySelector("#editAlbum");
-const saveBtn = modal.querySelector("#saveBtn");
-const deleteBtn = modal.querySelector("#deleteBtn");
 
 /* =========================
    렌더링
@@ -62,27 +32,32 @@ function render() {
       const card = document.createElement("div");
       card.className = "poca-card";
       card.style.backgroundImage = `url(${p.image})`;
+      card.style.backgroundSize = "cover";
+      card.style.backgroundPosition = "center";
+      card.style.opacity = p.owned ? "1" : "0.35";
 
-      if (!p.owned) card.classList.add("not-owned");
-
-      // 👉 클릭 = 보유 / 미보유
+      // 👉 탭: 보유 / 미보유
       card.addEventListener("click", () => {
         p.owned = !p.owned;
         save();
         render();
       });
 
-      // 👉 길게 누르기 = 수정 모달 (관리자만)
+      // 👉 길게 누르기: 수정 / 삭제
       if (isAdmin) {
         let timer;
         card.addEventListener("touchstart", () => {
-          timer = setTimeout(() => openModal(index), 600);
+          timer = setTimeout(() => openEdit(index), 600);
         });
         card.addEventListener("touchend", () => clearTimeout(timer));
       }
 
       pocaGrid.appendChild(card);
     });
+}
+
+function save() {
+  localStorage.setItem("pocas", JSON.stringify(pocas));
 }
 
 /* =========================
@@ -103,10 +78,10 @@ members.forEach(btn => {
 searchInput.addEventListener("input", render);
 
 /* =========================
-   관리자 모드
+   관리자
 ========================= */
 adminBtn.addEventListener("click", () => {
-  const pw = prompt("관리자 비밀번호 입력");
+  const pw = prompt("관리자 비밀번호");
   if (pw === ADMIN_PASSWORD) {
     isAdmin = true;
     alert("관리자 모드 ON");
@@ -119,10 +94,7 @@ adminBtn.addEventListener("click", () => {
    포카 추가
 ========================= */
 addBtn.addEventListener("click", () => {
-  if (!isAdmin) {
-    alert("관리자만 등록 가능");
-    return;
-  }
+  if (!isAdmin) return alert("관리자만 가능");
 
   const input = document.createElement("input");
   input.type = "file";
@@ -130,12 +102,11 @@ addBtn.addEventListener("click", () => {
 
   input.onchange = e => {
     const file = e.target.files[0];
-    if (!file) return;
-
     const reader = new FileReader();
+
     reader.onload = () => {
       const member = prompt("멤버 이름");
-      const album = prompt("앨범 / 포카 이름");
+      const album = prompt("포카 이름");
       if (!member || !album) return;
 
       pocas.push({
@@ -148,6 +119,7 @@ addBtn.addEventListener("click", () => {
       save();
       render();
     };
+
     reader.readAsDataURL(file);
   };
 
@@ -155,40 +127,32 @@ addBtn.addEventListener("click", () => {
 });
 
 /* =========================
-   모달 제어
+   수정 / 삭제 / 보유
 ========================= */
-function openModal(index) {
-  selectedIndex = index;
+function openEdit(index) {
   const p = pocas[index];
-  editMember.value = p.member;
-  editAlbum.value = p.album;
-  modal.classList.remove("hidden");
-}
 
-closeBtn.onclick = () => modal.classList.add("hidden");
+  const action = prompt(
+    "1: 멤버/이름 수정\n2: 보유 토글\n3: 삭제"
+  );
 
-saveBtn.onclick = () => {
-  if (selectedIndex === null) return;
-  pocas[selectedIndex].member = editMember.value;
-  pocas[selectedIndex].album = editAlbum.value;
+  if (action === "1") {
+    const m = prompt("멤버", p.member);
+    const a = prompt("이름", p.album);
+    if (m) p.member = m;
+    if (a) p.album = a;
+  }
+
+  if (action === "2") {
+    p.owned = !p.owned;
+  }
+
+  if (action === "3") {
+    if (confirm("삭제할까요?")) pocas.splice(index, 1);
+  }
+
   save();
-  modal.classList.add("hidden");
   render();
-};
-
-deleteBtn.onclick = () => {
-  if (selectedIndex === null) return;
-  pocas.splice(selectedIndex, 1);
-  save();
-  modal.classList.add("hidden");
-  render();
-};
-
-/* =========================
-   저장
-========================= */
-function save() {
-  localStorage.setItem("pocas", JSON.stringify(pocas));
 }
 
 /* =========================
