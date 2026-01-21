@@ -9,14 +9,18 @@ body {
   margin: 0;
   background: #ffffff;
   color: #000;
-  /* ⬇️ 추가 */
-  justify-content: center;
 }
+
+/* ===== 앱 전체 컨테이너 ===== */
+.app-container {
+  width: 100%;
+  max-width: 480px;   /* 아이폰 기준 */
+  margin: 0 auto;     /* 가운데 정렬 */
 }
 
 /* ===== 검색창 ===== */
 .search-wrap {
-  padding: 8px 12px;   /* 멤버바랑 동일 */
+  padding: 8px 12px;
 }
 
 .search-wrap input {
@@ -59,7 +63,6 @@ body {
   gap: 10px;
 }
 
-/* 포카 카드 */
 .poca-card {
   aspect-ratio: 55 / 85;
   border-radius: 10px;
@@ -81,7 +84,7 @@ body {
   height: 56px;
   border-radius: 50%;
   border: none;
-  background: #f4b6c2; /* 로즈쿼츠 */
+  background: #f4b6c2;
   color: #fff;
   font-size: 22px;
   font-weight: bold;
@@ -90,20 +93,8 @@ body {
 }
 
 /* ===== 반응형 ===== */
-@media (max-width: 480px) {
-  .poca-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
 @media (min-width: 768px) {
   .poca-grid {
     grid-template-columns: repeat(6, 1fr);
   }
-}
-
-/* ===== 앱 전체 컨테이너 ===== */
-.app-container {
-  width: 100%;
-  max-width: 480px;   /* 📱 아이폰 기준 */
 }
