@@ -62,7 +62,7 @@ document.querySelectorAll(".member").forEach(btn => {
 /* 검색 */
 document.getElementById("searchInput").oninput = render;
 
-/* 관리자 */
+/* 관리자 *
 document.getElementById("adminBtn").onclick = () => {
   const pw = prompt("비밀번호");
   if (pw === "0000") {
